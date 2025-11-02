@@ -3,9 +3,12 @@
 <package format="3">
   <name>test_package</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="benjamin@todo.todo">benjamin</maintainer>
-  <license>TODO: License declaration</license>
+  <description>Test package for publishing/subscribing</description>
+  <maintainer email="bsimon@kth.se">benjamin</maintainer>
+  <license>TODO: License declaration</license>xw
+
+  <exec_depend>rclpy</exec_depend> 
+  <exec_depend>rstd_msgs.msg</exec_depend> 
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

@@ -14,8 +14,8 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='benjamin',
-    maintainer_email='benjamin@todo.todo',
-    description='TODO: Package description',
+    maintainer_email='bsimon@kth.se',
+    description='Test package for publishing/subscribing',
     license='TODO: License declaration',
     extras_require={
         'test': [
@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'talker = test_package.talker:main',
+            'listener = test_package.listener:main',
         ],
     },
 )
