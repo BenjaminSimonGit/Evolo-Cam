@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'talker = test_package.talker:main',
         ],
     },
 )
