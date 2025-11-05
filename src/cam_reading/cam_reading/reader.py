@@ -1,12 +1,13 @@
 import rclpy
 from rclpy.node import Node
 
-from std_msgs.msg import String
 from geometry_msgs.msg import Vector3
 
 import socket
 import binascii
 import time
+
+import struct
 
 GCU_IP = "192.168.144.108"
 TCP_PORT = 2332
@@ -20,21 +21,22 @@ class MinimalPublisher(Node):
 
     def __init__(self):
         super().__init__('reader')
-        self.publisher_ = self.create_publisher(String, 'gimbal_euler', 10)
+        self.publisher_ = self.create_publisher(Vector3, 'gimbal_euler', 10)
         timer_period = 0.5  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.i = 0
 
     def timer_callback(self):
-        #msg = Vector3()
+        msg = Vector3()
+        data_from_camera = send_null_command()
+        extracted_data = struct.unpack("<hhh",data_from_camera[12:18])
 
-        print(send_null_command())
+        msg.x = extracted_data[0] * 100.0
+        msg.y = extracted_data[1] * 100.0
+        msg.z = extracted_data[2] * 100.0
 
-        #msg.data = 'Hello World: %d' % self.i
-        #self.publisher_.publish(msg)
-        #self.get_logger().info('Publishing: "%s"' % msg.data)
-        #self.i += 1
-
+        print(extracted_data)
+        self.publisher_.publish(msg)
 def build_packet(
     order: int,
     param_bytes: bytes = b"",
@@ -64,7 +66,7 @@ def build_packet(
     full_packet = packet + crc.to_bytes(2, "big")
 
     # Log full packet in hex for debugging
-    print("SEND:", full_packet.hex(" ").upper())
+    # print("SEND:", full_packet.hex(" ").upper())
 
     return full_packet
 
