@@ -31,9 +31,9 @@ class MinimalPublisher(Node):
         data_from_camera = send_null_command()
         extracted_data = struct.unpack("<hhh",data_from_camera[12:18])
 
-        msg.x = extracted_data[0] * 100.0
-        msg.y = extracted_data[1] * 100.0
-        msg.z = extracted_data[2] * 100.0
+        msg.x = extracted_data[0] / 100.0
+        msg.y = extracted_data[1] / 100.0
+        msg.z = extracted_data[2] / 100.0
 
         print(extracted_data)
         self.publisher_.publish(msg)
