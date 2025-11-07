@@ -25,7 +25,7 @@ class GimbalReadAndPublish(Node):
 
         # Create publisher
         self.publisher_ = self.create_publisher(Vector3, 'gimbal_euler', 10)
-        timer_period = 0.5  # seconds
+        timer_period = 3  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
         # Create subscriber
@@ -135,9 +135,9 @@ def send_euler_command(roll: int, pitch: int, yaw: int):
         packet = build_packet(
             order=0x10,
             # Converts to gimbal coordinate system and deci-degrees.
-            roll=int(roll) * -100,
+            roll=int(roll) * 100,
             pitch=int(pitch) * 100,
-            yaw=int(yaw) * -100,
+            yaw=int(yaw) * 100,
             ctrl_valid=True,
         )
         sock.sendall(packet)
