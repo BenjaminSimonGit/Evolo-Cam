@@ -1,3 +1,5 @@
+# This script is used for testing read_and_publish.py
+
 import rclpy
 from rclpy.node import Node
 
@@ -21,6 +23,7 @@ class MinimalPublisher(Node):
         msg.y = 0
         msg.z = 0
         self.publisher_.publish(msg)
+        print("Published order")
         self.i += 1
 
 
