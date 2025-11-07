@@ -38,8 +38,8 @@ class GimbalReadAndPublish(Node):
         extracted_data = struct.unpack("<hhh",data_from_camera[12:18])
 
         # Store data and convert to Evolos Coordinate system
-        msg.y = extracted_data[0] / 100.0
-        msg.x = extracted_data[1] / -100.0
+        msg.x = extracted_data[0] / 100.0
+        msg.y = extracted_data[1] / -100.0
         msg.z = extracted_data[2] / -100.0
 
         print(extracted_data)
