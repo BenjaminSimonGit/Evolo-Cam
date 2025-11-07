@@ -20,8 +20,8 @@ class MinimalPublisher(Node):
     def timer_callback(self):
         msg = Vector3()
         msg.x = 180*math.sin(self.i / 5)
-        msg.y = 0
-        msg.z = 0
+        msg.y = 0.0
+        msg.z = 0.0
         self.publisher_.publish(msg)
         print("Published order")
         self.i += 1
