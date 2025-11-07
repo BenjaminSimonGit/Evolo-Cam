@@ -39,7 +39,7 @@ class GimbalReadAndPublish(Node):
 
         # Store data and convert to Evolos Coordinate system
         msg.y = extracted_data[0] / 100.0
-        msg.x = extracted_data[1] / 100.0
+        msg.x = extracted_data[1] / -100.0
         msg.z = extracted_data[2] / -100.0
 
         print(extracted_data)
@@ -136,8 +136,8 @@ def send_euler_command(roll: int, pitch: int, yaw: int):
             order=0x10,
             # Converts to gimbal coordinate system and deci-degrees.
             roll=int(roll) * 100,
-            pitch=int(pitch) * 100,
-            yaw=int(yaw) * 100,
+            pitch=int(pitch) * -100,
+            yaw=int(yaw) * -100,
             ctrl_valid=True,
         )
         sock.sendall(packet)
