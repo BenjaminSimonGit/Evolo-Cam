@@ -25,8 +25,8 @@ setup(
     entry_points={
         'console_scripts': [
         'reader = cam_reading.reader:main',
-        'read_and_publish = cam_reading.read_and_publish:main'   
-        'publish_gimbal_order = cam_reading.publish_gimbal_order:main' 
+        'read_and_publish = cam_reading.read_and_publish:main',
+        'publish_gimbal_order = cam_reading.publish_gimbal_order:main',
         ],
     },
 )
