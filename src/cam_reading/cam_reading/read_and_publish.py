@@ -133,24 +133,16 @@ def send_euler_command(roll: int, pitch: int, yaw: int):
     if sock:
         send_null_command()
         packet = build_packet(
-            order=0x14,
+            order=0x10,
             # Converts to gimbal coordinate system and deci-degrees.
             pitch=int(roll) * 100,
             roll=int(pitch) * 100,
-            yaw=int(yaw) * -100,
+            yaw=int(yaw) * (-1)*100,
             ctrl_valid=True,
         )
         sock.sendall(packet)
         sock.recv(1024)
 
-
-def switch_to_euler_mode():
-    global sock
-    if sock:
-        send_null_command()
-        packet = build_packet(order=0x14, roll=0, pitch=0, yaw=0, ctrl_valid=True)
-        sock.sendall(packet)
-        sock.recv(1024)
 
 
 def main(args=None):
@@ -160,7 +152,6 @@ def main(args=None):
     minimal_publisher = GimbalReadAndPublish()
 
     establish_connection_with_handshake()
-    switch_to_euler_mode()
 
     rclpy.spin(minimal_publisher)
 
