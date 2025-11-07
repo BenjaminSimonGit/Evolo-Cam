@@ -45,7 +45,7 @@ class GimbalReadAndPublish(Node):
 
 
 
-        print(extracted_data)
+        print(msg)
         self.publisher_.publish(msg)
 
     def listener_callback(self, msg):
